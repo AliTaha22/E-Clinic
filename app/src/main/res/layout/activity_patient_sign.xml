@@ -31,7 +31,7 @@
         android:layout_gravity="center"
         android:id="@+id/P_mail"
         android:hint="Email"
-        android:textColorHint="@color/black"
+        android:textColorHint="#504E4E"
         android:textColor="@color/black"
         ></EditText>
     <EditText
@@ -42,7 +42,7 @@
         android:id="@+id/P_Pass"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="@color/black"
+        android:textColorHint="#504E4E"
         ></EditText>
     <Button
         android:layout_marginTop="5dp"
