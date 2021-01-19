@@ -40,7 +40,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:textColorHint="@color/black"
+            android:textColorHint="#504E4E"
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             ></EditText>
@@ -58,7 +58,7 @@
 
             ></ImageView>
         <EditText
-            android:textColorHint="@color/black"
+            android:textColorHint="#504E4E"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Qualification"
@@ -83,7 +83,7 @@
         <EditText
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/black"
+            android:textColorHint="#504E4E"
             android:hint="Age"
             android:layout_marginLeft="22dp"
             android:textColor="@color/black"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:hint="Gender"
             android:layout_marginLeft="22dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="#504E4E"
             android:textColor="@color/black"
             ></EditText>
     </LinearLayout>
@@ -126,7 +126,7 @@
             android:hint="Contact"
             android:layout_marginLeft="22dp"
             android:inputType="number"
-            android:textColorHint="@color/black"
+            android:textColorHint="#504E4E"
             android:textColor="@color/black"
             ></EditText>
     </LinearLayout>
@@ -145,7 +145,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:textColorHint="@color/black"
+            android:textColorHint="#504E4E"
             android:layout_marginLeft="22dp"
             android:inputType="textEmailAddress"
             android:textColor="@color/black"
@@ -169,7 +169,7 @@
             android:layout_marginLeft="22dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColorHint="@color/black"
+            android:textColorHint="#504E4E"
             android:textColor="@color/black"
             ></EditText>
     </LinearLayout>
