@@ -172,6 +172,7 @@
             android:inputType="textPassword"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
+
             ></EditText>
     </LinearLayout>
 
