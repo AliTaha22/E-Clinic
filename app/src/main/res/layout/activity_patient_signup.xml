@@ -2,6 +2,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white">
     <ImageView
@@ -41,11 +42,11 @@
             android:layout_height="wrap_content"
             android:hint="Name"
             android:layout_marginLeft="20dp"
-            android:textColorHint="#504E4E"
+            android:textColorHint="@color/black"
             android:textColor="@color/black"
+            android:id="@+id/pName"
             ></EditText>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,9 +64,10 @@
             android:layout_height="wrap_content"
             android:hint="DoB"
             android:layout_marginLeft="20dp"
-            android:textColorHint="#504E4E"
+            android:textColorHint="@color/black"
             android:inputType="date"
             android:textColor="@color/black"
+            android:id="@+id/pDOB"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -84,8 +86,9 @@
             android:layout_height="wrap_content"
             android:hint="Age"
             android:layout_marginLeft="22dp"
-            android:textColorHint="#504E4E"
+            android:textColorHint="@color/black"
             android:textColor="@color/black"
+            android:id="@+id/pAge"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -104,8 +107,9 @@
             android:layout_height="wrap_content"
             android:hint="Gender"
             android:layout_marginLeft="22dp"
-            android:textColorHint="#504E4E"
+            android:textColorHint="@color/black"
             android:textColor="@color/black"
+            android:id="@+id/pGender"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -124,9 +128,10 @@
             android:layout_height="wrap_content"
             android:hint="Contact"
             android:layout_marginLeft="22dp"
-            android:textColorHint="#504E4E"
+            android:textColorHint="@color/black"
             android:inputType="number"
             android:textColor="@color/black"
+            android:id="@+id/pContactNo"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -146,8 +151,9 @@
             android:hint="Email"
             android:layout_marginLeft="22dp"
             android:inputType="textEmailAddress"
-            android:textColorHint="#504E4E"
+            android:textColorHint="@color/black"
             android:textColor="@color/black"
+            android:id="@+id/pEmail"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -167,8 +173,24 @@
             android:hint="Password"
             android:layout_marginLeft="22dp"
             android:inputType="textPassword"
-            android:textColorHint="#504E4E"
+            android:textColorHint="@color/black"
             android:textColor="@color/black"
+            android:id="@+id/pPass"
             ></EditText>
     </LinearLayout>
+
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="Sign Up"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:id="@+id/btnSignUp"
+        android:background="@drawable/mybtn"
+        android:layout_margin="5dp"
+        app:backgroundTint="#2196F3"
+        ></Button>
+
+
 </LinearLayout>
