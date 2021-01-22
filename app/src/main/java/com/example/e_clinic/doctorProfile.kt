@@ -8,7 +8,7 @@ class doctorProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_profile)
 
-        //var name:
+        //var name :
 
     }
 }
