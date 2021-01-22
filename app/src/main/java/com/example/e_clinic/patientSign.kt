@@ -23,7 +23,10 @@ class patientSign : AppCompatActivity() {
 
         var authentication: FirebaseAuth = Firebase.auth
 
-
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val user = authentication.currentUser
+        if(user != null)
+            startActivity(Intent(this@patientSign, patientMainScreen::class.java))
 
         signIn.setOnClickListener {
 

@@ -26,7 +26,7 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/pp"
             ></ImageView>
-        <TextView
+        <EditText
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Name"
@@ -35,78 +35,7 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
-            ></TextView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/calendar"
-
-            ></ImageView>
-        <TextView
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:hint="DoB"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:textColorHint="#504E4E"
-            android:textColor="@color/black"
-            ></TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/age"
-            ></ImageView>
-        <TextView
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:hint="Age"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:textColorHint="#504E4E"
-            android:textColor="@color/black"
-            ></TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/gender"
-            ></ImageView>
-        <TextView
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:hint="Gender"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:textColorHint="#504E4E"
-            android:textColor="@color/black"
-            ></TextView>
+            ></EditText>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -120,7 +49,7 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/phone"
             ></ImageView>
-        <TextView
+        <EditText
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Contact"
@@ -129,7 +58,7 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
-            ></TextView>
+            ></EditText>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -143,7 +72,7 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/email"
             ></ImageView>
-        <TextView
+        <EditText
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Email"
@@ -152,7 +81,7 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
-            ></TextView>
+            ></EditText>
     </LinearLayout>
 
 </LinearLayout>
