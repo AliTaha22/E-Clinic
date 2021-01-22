@@ -26,21 +26,28 @@ class doctorSign : AppCompatActivity() {
         var authentication: FirebaseAuth = Firebase.auth
 
 
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val user = Firebase.auth.currentUser
+        if(user != null)
+            startActivity(Intent(this@doctorSign, doctorMainScreen::class.java))
 
         signIn.setOnClickListener {
 
-            var email: String = signIn_email.text.toString()
-            var pass: String = signIn_password.text.toString()
-            authentication.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this)
-            { task ->
+                var email: String = signIn_email.text.toString()
+                var pass: String = signIn_password.text.toString()
+                authentication.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this@doctorSign)
+                { task ->
 
-                if (task.isSuccessful)
-                    Toast.makeText(this, "Sign in successfull", Toast.LENGTH_LONG).show()
-                else
-                    Toast.makeText(this, "Error: " + task.exception.toString(), Toast.LENGTH_LONG)
-                        .show()
-            }
-
+                    //if correct username and password is entered, we will switch to main menu screen
+                    if (task.isSuccessful)
+                    {
+                        startActivity(Intent(this@doctorSign, doctorMainScreen::class.java))
+                        Toast.makeText(this, "Sign in successful", Toast.LENGTH_LONG).show()
+                    }
+                    else
+                        Toast.makeText(this, "Error: " + task.exception.toString(), Toast.LENGTH_LONG)
+                            .show()
+                }
 
         }
         signup.setOnClickListener {

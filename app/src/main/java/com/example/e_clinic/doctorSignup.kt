@@ -1,7 +1,6 @@
 package com.example.e_clinic
 
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -30,11 +29,6 @@ class doctorSignup : AppCompatActivity() {
 
 
 
-        //Progress bar syntax
-        var loading= ProgressDialog(this)
-        loading.setTitle("Signing !")
-        loading.setMessage("Please Wait....")
-
 
         //required variables to fetch the data into database.
         var name: EditText = findViewById(R.id.dName)
@@ -50,7 +44,6 @@ class doctorSignup : AppCompatActivity() {
 
         signup.setOnClickListener {
 
-            loading.show()
             //storing the entered patient data into strings.
             var dName: String? = name.text.toString()
             var dQualification: String? = qualification.text.toString()
@@ -88,7 +81,6 @@ class doctorSignup : AppCompatActivity() {
                         }
                     }
 
-                    loading.dismiss()
                     var AD = AlertDialog.Builder(this@doctorSignup)
                     AD.setTitle("Sign Up Successful")
                     //AD.setMessage("Continue")
@@ -103,7 +95,6 @@ class doctorSignup : AppCompatActivity() {
                 }
                 else
                 {
-                    loading.dismiss()
                     var AD = AlertDialog.Builder(this@doctorSignup)
                     AD.setTitle("Sign Up Error")
                     AD.setMessage(task.exception.toString())

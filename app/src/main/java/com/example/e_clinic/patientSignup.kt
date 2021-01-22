@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -90,8 +91,13 @@ class patientSignup : AppCompatActivity() {
                     loading.dismiss()
                     var AD = AlertDialog.Builder(this@patientSignup)
                     AD.setTitle("Sign Up Successful")
-                    //AD.setMessage("Continue")
                     AD.setPositiveButton("Continue") { dialog, which ->
+
+                        val user = authentication.currentUser
+                        val profileUpdates = userProfileChangeRequest {
+                            displayName = pData.name.toString()
+                        }
+                        user?.updateProfile(profileUpdates)
 
                         startActivity(Intent(this@patientSignup, patientSign::class.java))
                         finish()
