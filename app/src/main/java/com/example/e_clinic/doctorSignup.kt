@@ -27,7 +27,9 @@ class doctorSignup : AppCompatActivity() {
         var mypref: SharedPreferences = getSharedPreferences("Doctor ID", MODE_PRIVATE)
         var editor = mypref.edit()
 
-
+//Making share pref for the finding of doctor data who sign in i pass email from this screen to doctor main screen and search it in firebase
+        var mypref1: SharedPreferences = getSharedPreferences("DoctorEM", MODE_PRIVATE)
+        var editor1 = mypref1.edit()
 
 
         //required variables to fetch the data into database.
@@ -55,8 +57,8 @@ class doctorSignup : AppCompatActivity() {
 
             //creating a patient-data object, in which all our patient data required for sign up will be stored.
 
-            var dData: DoctorData = DoctorData(dName, dQualification, dAge, dGender, dContact, dEmail, dPass)
-
+            var dData: DoctorData = DoctorData()
+            dData.setData(dName, dQualification, dAge, dGender, dContact, dEmail, dPass)
             //fetching the unique doctor ID, it also helps us identify the number of doctors registered into our DB.
             var dID = mypref.getInt("d_ID", 1)
 
@@ -85,7 +87,9 @@ class doctorSignup : AppCompatActivity() {
                     AD.setTitle("Sign Up Successful")
                     //AD.setMessage("Continue")
                     AD.setPositiveButton("Continue") { dialog, which ->
-
+                        editor1.putString("SigndocMail",dEmail)
+                        editor1.apply()
+                        editor1.commit()
                         startActivity(Intent(this@doctorSignup, doctorSign::class.java))
                         finish()
                     }

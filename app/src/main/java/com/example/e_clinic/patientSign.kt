@@ -1,6 +1,7 @@
 package com.example.e_clinic
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -22,7 +23,9 @@ class patientSign : AppCompatActivity() {
         var signIn_password:EditText = findViewById(R.id.P_Pass)
 
         var authentication: FirebaseAuth = Firebase.auth
-
+//Making share pref for the finding of doctor data who sign in i pass email from this screen to patient main screen and search it in firebase
+        var mypref1: SharedPreferences = getSharedPreferences("PatientEM", MODE_PRIVATE)
+        var editor1 = mypref1.edit()
         // Check if user is signed in (non-null) and update UI accordingly.
         val user = authentication.currentUser
         if(user != null)
@@ -35,8 +38,13 @@ class patientSign : AppCompatActivity() {
             authentication.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this)
             { task ->
 
-                if (task.isSuccessful)
+                if (task.isSuccessful) {
+                    editor1.putString("SignpatMail", email)
+                    editor1.apply()
+                    editor1.commit()
                     Toast.makeText(this, "Sign in successfull", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this,patientMainScreen::class.java))
+                }
                 else
                     Toast.makeText(this, "Error: " + task.exception.toString(), Toast.LENGTH_LONG)
                         .show()

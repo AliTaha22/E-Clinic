@@ -1,12 +1,17 @@
 package com.example.e_clinic
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class patientMainScreen : AppCompatActivity() {
@@ -30,15 +35,29 @@ class patientMainScreen : AppCompatActivity() {
         //getting the name of current user whose signed in.
         val user = authentication.currentUser
 
-        user?.let {
-            //just in case if displayname is not yet loaded, we will refresh our screen so it can display the appropriate name.
-            if(user?.displayName == null)
-            {
-                finish();
-                startActivity(getIntent());
+        //==========================================Data Reading of the Patient who sign in====================
+        //Share pref for searching Sign in Patient data from fire base by the help of email
+        var mypref1: SharedPreferences = getSharedPreferences("PatientEM", MODE_PRIVATE)
+        var editor1 = mypref1.edit()
+        var signerMail=mypref1.getString("SignpatMail",null)
+        val database = Firebase.database
+        val db = database.getReference("Patient Data/")
+        var use=PatientData()
+        db.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (obj in snapshot.children) {
+                    use = obj.getValue(PatientData::class.java)!!
+                    if(signerMail==user?.email)
+                    {
+                        pName.text = "Hi, Mr/Mrs " + use?.name.toString()
+                        break
+                    }
+                }
             }
-            pName.text = "Hi, " + user?.displayName.toString()
-        }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+//==========================================Data Reading of the Patient who sign in====================
 
         pProfile.setOnClickListener({
 

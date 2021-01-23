@@ -38,6 +38,7 @@
         android:hint="Email"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
+        android:inputType="textEmailAddress"
         ></EditText>
     <EditText
         android:layout_width="280dp"

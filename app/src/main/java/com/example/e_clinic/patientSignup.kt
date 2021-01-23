@@ -28,7 +28,9 @@ class patientSignup : AppCompatActivity() {
         //creating a shared preferences to store the ID Number of patient i.e it is a unique id to identify the patient in database
         var mypref: SharedPreferences = getSharedPreferences("Patient ID", MODE_PRIVATE)
         var editor = mypref.edit()
-
+//Making share pref for the finding of Patient data who sign in i pass email from this screen to patient main screen and search it in firebase
+        var mypref1: SharedPreferences = getSharedPreferences("PatientEM", MODE_PRIVATE)
+        var editor1 = mypref1.edit()
         //Progress bar syntax
         var loading= ProgressDialog(this)
         loading.setTitle("Signing !")
@@ -56,14 +58,14 @@ class patientSignup : AppCompatActivity() {
             var pDOB: String? = DOB.text.toString()
             var pAge: String? = age.text.toString()
             var pGender: String? = gender.text.toString()
-            var pContactNo: String? = gender.text.toString()
+            var pContactNo: String? = contact.text.toString()
             var pEmail: String? = email.text.toString()
             var pPass: String? = pass.text.toString()
 
             //creating a patient-data object, in which all our patient data required for sign up will be stored.
 
-            var pData: PatientData = PatientData(pName, pDOB, pAge, pGender, pContactNo, pEmail, pPass)
-
+            var pData: PatientData = PatientData()
+            pData.setData(pName, pDOB, pAge, pGender, pContactNo, pEmail, pPass)
             //fetching the unique patient ID, it also helps us identify the number of patients registered into our DB.
             var pID = mypref.getInt("p_ID", 1)
 
@@ -98,7 +100,9 @@ class patientSignup : AppCompatActivity() {
                             displayName = pData.name.toString()
                         }
                         user?.updateProfile(profileUpdates)
-
+                        editor1.putString("SignpatMail", pEmail)
+                        editor1.apply()
+                        editor1.commit()
                         startActivity(Intent(this@patientSignup, patientSign::class.java))
                         finish()
                     }

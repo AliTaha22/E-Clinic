@@ -1,19 +1,22 @@
 <LinearLayout
+
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white">
 
 
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:id="@+id/image1"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:src="@drawable/pp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         ></ImageView>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,7 +29,7 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/pp"
             ></ImageView>
-        <EditText
+        <TextView
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Name"
@@ -35,7 +38,82 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
-            ></EditText>
+            android:id="@+id/PP_Name"
+            ></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/calendar"
+
+            ></ImageView>
+        <TextView
+            android:id="@+id/PP_DOB"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="DOB"
+            android:textSize="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:textColorHint="#504E4E"
+            android:textColor="@color/black"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/age"
+            ></ImageView>
+        <TextView
+            android:id="@+id/PP_Age"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:textSize="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:textColorHint="#504E4E"
+            android:textColor="@color/black"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/gender"
+            ></ImageView>
+        <TextView
+            android:id="@+id/PP_Gender"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="Gender"
+            android:textSize="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:textColorHint="#504E4E"
+            android:textColor="@color/black"
+            ></TextView>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -49,7 +127,8 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/phone"
             ></ImageView>
-        <EditText
+        <TextView
+            android:id="@+id/PP_Contact"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Contact"
@@ -58,7 +137,7 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
-            ></EditText>
+            ></TextView>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -72,7 +151,8 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/email"
             ></ImageView>
-        <EditText
+        <TextView
+            android:id="@+id/PP_Email"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="Email"
@@ -81,7 +161,28 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
-            ></EditText>
+            ></TextView>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Disease"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textColor="#2196F3"
+        ></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="-----------"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:textColorHint="#504E4E"
+        android:textColor="@color/black"
+        ></TextView>
 </LinearLayout>
