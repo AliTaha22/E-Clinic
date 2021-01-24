@@ -21,8 +21,9 @@ class patientProfile : AppCompatActivity() {
         var textGender: TextView =findViewById(R.id.PP_Gender)
         var textContact: TextView =findViewById(R.id.PP_Contact)
         var textMail: TextView =findViewById(R.id.PP_Email)
+        var textDisease: TextView =findViewById(R.id.PP_Disease)
 
-
+        //Getting data from firebase
         var mypref1: SharedPreferences = getSharedPreferences("PatientEM", MODE_PRIVATE)
         var editor1 = mypref1.edit()
         var signerMail=mypref1.getString("SignpatMail",null)
@@ -41,6 +42,7 @@ class patientProfile : AppCompatActivity() {
                         textGender.text =  user?.gender.toString()
                         textContact.text =  user?.contact.toString()
                         textMail.text =  user?.email.toString()
+                        textDisease.text=user?.disease.toString()
                         break
                     }
                 }

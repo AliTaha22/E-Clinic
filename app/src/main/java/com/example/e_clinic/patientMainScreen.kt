@@ -59,22 +59,22 @@ class patientMainScreen : AppCompatActivity() {
         })
 //==========================================Data Reading of the Patient who sign in====================
 
-        pProfile.setOnClickListener({
+        pProfile.setOnClickListener {
 
             startActivity(Intent(this@patientMainScreen, patientProfile::class.java))
-        })
-        findDoctor.setOnClickListener({})
+        }
+        findDoctor.setOnClickListener {
+            startActivity(Intent(this,patientDisease::class.java))
+        }
         bookAppointment.setOnClickListener({})
         viewReply.setOnClickListener({})
-        signOut.setOnClickListener({
+        signOut.setOnClickListener {
 
             authentication.signOut()
             startActivity(Intent(this@patientMainScreen, patientSign::class.java))
             finish()
 
-        })
-
-
+        }
 
 
     }//on create ends here

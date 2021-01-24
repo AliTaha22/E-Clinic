@@ -184,5 +184,6 @@
         android:layout_marginLeft="20dp"
         android:textColorHint="#504E4E"
         android:textColor="@color/black"
+        android:id="@+id/PP_Disease"
         ></TextView>
 </LinearLayout>

@@ -1,0 +1,30 @@
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="315dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:hint="Enter your Problem Here First then choose your doctor"
+        android:textColor="@color/black"
+        android:id="@+id/p_msg"></EditText>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:id="@+id/docRecycler"
+        >
+
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+
+</LinearLayout>
