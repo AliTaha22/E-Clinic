@@ -100,6 +100,7 @@ class patientSignup : AppCompatActivity() {
                             displayName = pData.name.toString()
                         }
                         user?.updateProfile(profileUpdates)
+                        user?.updateEmail(pData.email.toString())
                         editor1.putString("SignpatMail", pEmail)
                         editor1.apply()
                         editor1.commit()

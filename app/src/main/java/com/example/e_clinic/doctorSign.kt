@@ -18,8 +18,8 @@ class doctorSign : AppCompatActivity() {
 
 
         //getting button id's
-        var signup: Button = findViewById(R.id.D_signUp)
         var signIn: Button = findViewById(R.id.D_signIn)
+        var signup: Button = findViewById(R.id.D_signUp)
 
         var signIn_email: EditText = findViewById(R.id.D_mail)
         var signIn_password: EditText = findViewById(R.id.D_Pass)
@@ -41,22 +41,22 @@ class doctorSign : AppCompatActivity() {
 
                 var email: String = signIn_email.text.toString()
                 var pass: String = signIn_password.text.toString()
+            if(!email.isEmpty() && !pass.isEmpty()) {
                 authentication.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this@doctorSign)
                 { task ->
 
                     //if correct username and password is entered, we will switch to main menu screen
-                    if (task.isSuccessful)
-                    {
-                        editor1.putString("SigndocMail",email)
+                    if (task.isSuccessful) {
+                        editor1.putString("SigndocMail", email)
                         editor1.apply()
                         editor1.commit()
                         startActivity(Intent(this@doctorSign, doctorMainScreen::class.java))
                         Toast.makeText(this, "Sign in successful", Toast.LENGTH_LONG).show()
-                    }
-                    else
+                    } else
                         Toast.makeText(this, "Error: " + task.exception.toString(), Toast.LENGTH_LONG)
-                            .show()
+                                .show()
                 }
+            }
 
         }
         signup.setOnClickListener {

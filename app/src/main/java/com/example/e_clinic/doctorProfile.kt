@@ -29,6 +29,7 @@ class doctorProfile : AppCompatActivity() {
         val database = Firebase.database
         val db = database.getReference("Doctor Data/")
         var user=DoctorData()
+
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (obj in snapshot.children) {
