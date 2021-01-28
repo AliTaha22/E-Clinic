@@ -21,8 +21,6 @@ class patientMainScreen : AppCompatActivity() {
 
 
 
-        var authentication: FirebaseAuth = Firebase.auth
-
 
         //here we will get the required ids of buttons
         var pName: TextView = findViewById(R.id.p_NameTV)
@@ -32,11 +30,9 @@ class patientMainScreen : AppCompatActivity() {
         var viewReply: Button = findViewById(R.id.P_viewReply)
         var signOut: Button = findViewById(R.id.P_signOut)
 
-        //getting the name of current user whose signed in.
-        val user = authentication.currentUser
 
         //==========================================Data Reading of the Patient who sign in====================
-        //Share pref for searching Sign in Patient data from fire base by the help of email
+        //Share pref for searching Sign in Patient data from fire base by the help of id
         var mypref1: SharedPreferences = getSharedPreferences("PatientEM", MODE_PRIVATE)
         var editor1 = mypref1.edit()
         var signerMail=mypref1.getString("SignpatMail",null)
@@ -47,7 +43,7 @@ class patientMainScreen : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (obj in snapshot.children) {
                     use = obj.getValue(PatientData::class.java)!!
-                    if(signerMail==user?.email)
+                    if(signerMail==use?.ID)
                     {
                         pName.text = "Hi, Mr/Mrs " + use?.name.toString()
                         break
@@ -66,14 +62,19 @@ class patientMainScreen : AppCompatActivity() {
         findDoctor.setOnClickListener {
             startActivity(Intent(this,patientDisease::class.java))
         }
+
+
         bookAppointment.setOnClickListener({})
         viewReply.setOnClickListener({})
-        signOut.setOnClickListener {
 
-            authentication.signOut()
+
+
+        signOut.setOnClickListener {
+            editor1.putString(null,"SignpatMail")
+            editor1.apply()
+            editor1.commit()
             startActivity(Intent(this@patientMainScreen, patientSign::class.java))
             finish()
-
         }
 
 

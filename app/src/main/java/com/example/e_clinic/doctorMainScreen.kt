@@ -28,17 +28,16 @@ class doctorMainScreen : AppCompatActivity() {
         var checkAppointments:Button = findViewById(R.id.D_checkAppointments)
         var signOut:Button = findViewById(R.id.D_signOut)
 
-        var authentication:FirebaseAuth = Firebase.auth
 
 
 
 
 
 //==========================================Data Reading of the Doctor who sign in====================
-        //Share pref for searching Sign in doctor data from fire base by the help of email
+        //Share pref for searching Sign in doctor data from fire base by the help of id
         var mypref1: SharedPreferences = getSharedPreferences("DoctorEM", MODE_PRIVATE)
         var editor1 = mypref1.edit()
-        var signerMail=mypref1.getString("SigndocMail",null)
+        var signerId=mypref1.getString("SigndocMail",null)
         val database = Firebase.database
         val db = database.getReference("Doctor Data/")
         var user=DoctorData()
@@ -46,7 +45,7 @@ class doctorMainScreen : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (obj in snapshot.children) {
                     user = obj.getValue(DoctorData::class.java)!!
-                    if(signerMail==user?.email)
+                    if(signerId==user?.ID)
                     {
                         dname.text = "Hi, Dr " + user?.name.toString()
                         break
@@ -80,7 +79,9 @@ class doctorMainScreen : AppCompatActivity() {
 
         signOut.setOnClickListener({
 
-            authentication.signOut()
+            editor1.putString(null,"SigndocMail")
+            editor1.apply()
+            editor1.commit()
             startActivity(Intent(this@doctorMainScreen, doctorSign::class.java))
             finish()
         })

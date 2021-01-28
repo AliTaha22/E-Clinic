@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="match_parent"
@@ -42,6 +43,7 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
+            android:id="@+id/nameView"
             ></TextView>
     </LinearLayout>
 
@@ -67,75 +69,7 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
-            ></TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/age"
-            ></ImageView>
-        <TextView
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:hint="Age"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:textColorHint="#504E4E"
-            android:textColor="@color/black"
-            ></TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/gender"
-            ></ImageView>
-        <TextView
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:hint="Gender"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:textColorHint="#504E4E"
-            android:textColor="@color/black"
-            ></TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/phone"
-            ></ImageView>
-        <TextView
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:hint="Contact"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:textColorHint="#504E4E"
-            android:textColor="@color/black"
+            android:id="@+id/qualView"
             ></TextView>
     </LinearLayout>
     <LinearLayout
@@ -159,19 +93,31 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="#504E4E"
             android:textColor="@color/black"
+            android:id="@+id/mailView"
             ></TextView>
     </LinearLayout>
 
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="315dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:hint="Enter your Problem Here First then choose your doctor"
+        android:textColor="@color/black"
+        android:id="@+id/p_msg"></EditText>
+
     <Button
-        android:layout_width="200dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:text="Contact Doctor"
         android:textStyle="italic"
         android:textColor="@color/white"
+        android:id="@+id/ContactDoc"
+        android:background="@drawable/mybtn"
         app:backgroundTint="#2196F3"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/mybtn"
-        android:text="Contact Doctor"
-        android:textAllCaps="false"></Button>
+        ></Button>
 
 </LinearLayout>

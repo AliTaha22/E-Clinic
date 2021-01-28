@@ -45,6 +45,7 @@
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:id="@+id/pName"
+            android:inputType="textPersonName"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -89,6 +90,7 @@
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:id="@+id/pAge"
+            android:inputType="number"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -148,7 +150,7 @@
         <EditText
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="User-ID"
             android:layout_marginLeft="22dp"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/black"

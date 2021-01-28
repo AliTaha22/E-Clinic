@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
@@ -19,75 +20,40 @@ class doctorSignup : AppCompatActivity() {
         //getting required reference from firebase.
         val database = Firebase.database
         val myRef = database.getReference("Doctor Data")
-
-        //getting authentication reference.
-        var authentication: FirebaseAuth = Firebase.auth
-
-        //creating a shared preferences to store the ID Number of Doctor i.e it is a unique id to identify the doctor in database
-        var mypref: SharedPreferences = getSharedPreferences("Doctor ID", MODE_PRIVATE)
-        var editor = mypref.edit()
-
-//Making share pref for the finding of doctor data who sign in i pass email from this screen to doctor main screen and search it in firebase
+        //Making share pref for the finding of doctor data who sign in i pass userID from this screen to doctor main screen and search it in firebase
         var mypref1: SharedPreferences = getSharedPreferences("DoctorEM", MODE_PRIVATE)
         var editor1 = mypref1.edit()
-
-
         //required variables to fetch the data into database.
         var name: EditText = findViewById(R.id.dName)
         var qualification: EditText = findViewById(R.id.dQualification)
         var age: EditText = findViewById(R.id.dAge)
         var gender: EditText = findViewById(R.id.dGender)
         var contact: EditText = findViewById(R.id.dContact)
-        var email: EditText = findViewById(R.id.dEmail)
+        var id: EditText = findViewById(R.id.dId)
         var pass: EditText = findViewById(R.id.dPassword)
-
         //button for signing up
         var signup: Button = findViewById(R.id.d_btnSignUp)
-
         signup.setOnClickListener {
-
             //storing the entered patient data into strings.
             var dName: String? = name.text.toString()
             var dQualification: String? = qualification.text.toString()
             var dAge: String? = age.text.toString()
             var dGender: String? = gender.text.toString()
             var dContact: String? = contact.text.toString()
-            var dEmail: String? = email.text.toString()
+            var dId: String? = id.text.toString()
             var dPass: String? = pass.text.toString()
-
             //creating a patient-data object, in which all our patient data required for sign up will be stored.
-
             var dData: DoctorData = DoctorData()
-            dData.setData(dName, dQualification, dAge, dGender, dContact, dEmail, dPass)
-            //fetching the unique doctor ID, it also helps us identify the number of doctors registered into our DB.
-            var dID = mypref.getInt("d_ID", 1)
-
-
-            //here, we're checking if the user(doctor) doesnt exist already then we will create new account, else user will have to try another email
-            // which has not been used before.
-            authentication.createUserWithEmailAndPassword(dData.email.toString(), dData.pass.toString()).addOnCompleteListener(this@doctorSignup)
-            {
+            dData.setData(dName, dQualification, dAge, dGender, dContact, dId, dPass)
+            //storing the newly registered patient's data into our database with unique identification.
+            myRef.child(""+dData.ID.toString()).setValue(dData).addOnCompleteListener(this@doctorSignup){
                     task ->
                 if(task.isSuccessful)
                 {
-                    //storing the newly registered patient's data into our database with unique identification.
-                    myRef.child("Doctor: " + dID).setValue(dData).addOnCompleteListener(this@doctorSignup){
-                            task ->
-
-                        if(task.isSuccessful)
-                        {
-                            //whenever new patient registers, the patient ID will be incremented by 1 to uniquely identify it.
-                            editor.putInt("d_ID", dID+1)
-                            editor.apply()
-                            editor.commit()
-                        }
-                    }
-
                     var AD = AlertDialog.Builder(this@doctorSignup)
                     AD.setTitle("Sign Up Successful")
-                    //AD.setMessage("Continue")
                     AD.setPositiveButton("Continue") { dialog, which ->
-                        editor1.putString("SigndocMail",dEmail)
+                        editor1.putString("SigndocMail",dId)
                         editor1.apply()
                         editor1.commit()
                         startActivity(Intent(this@doctorSignup, doctorSign::class.java))
@@ -95,7 +61,6 @@ class doctorSignup : AppCompatActivity() {
                     }
                     AD.create()
                     AD.show()
-
                 }
                 else
                 {

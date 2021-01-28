@@ -34,15 +34,14 @@ class patientProfile : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (obj in snapshot.children) {
                     user = obj.getValue(PatientData::class.java)!!
-                    if(signerMail==user?.email)
+                    if(signerMail==user?.ID)
                     {
                         textName.text =  user?.name.toString()
                         textQual.text =  user?.DOB.toString()
                         textAge.text =  user?.age.toString()
                         textGender.text =  user?.gender.toString()
                         textContact.text =  user?.contact.toString()
-                        textMail.text =  user?.email.toString()
-                        textDisease.text=user?.disease.toString()
+                        textMail.text =  user?.ID.toString()
                         break
                     }
                 }

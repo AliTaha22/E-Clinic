@@ -68,6 +68,7 @@
             android:textColor="@color/black"
             android:inputType="text"
             android:id="@+id/dQualification"
+            android:textAllCaps="false"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -148,12 +149,12 @@
         <EditText
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="User-ID"
             android:textColorHint="@color/black"
             android:layout_marginLeft="22dp"
             android:inputType="textEmailAddress"
             android:textColor="@color/black"
-            android:id="@+id/dEmail"
+            android:id="@+id/dId"
             ></EditText>
     </LinearLayout>
     <LinearLayout

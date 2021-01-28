@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
@@ -22,22 +23,13 @@ class patientSignup : AppCompatActivity() {
         val database = Firebase.database
         val myRef = database.getReference("Patient Data")
 
-        //getting authentication reference.
-        var authentication: FirebaseAuth = Firebase.auth
-
-        //creating a shared preferences to store the ID Number of patient i.e it is a unique id to identify the patient in database
-        var mypref: SharedPreferences = getSharedPreferences("Patient ID", MODE_PRIVATE)
-        var editor = mypref.edit()
-//Making share pref for the finding of Patient data who sign in i pass email from this screen to patient main screen and search it in firebase
+        //Making share pref for the finding of Patient data who sign in i pass email from this screen to patient main screen and search it in firebase
         var mypref1: SharedPreferences = getSharedPreferences("PatientEM", MODE_PRIVATE)
         var editor1 = mypref1.edit()
         //Progress bar syntax
         var loading= ProgressDialog(this)
         loading.setTitle("Signing !")
         loading.setMessage("Please Wait....")
-
-
-
         //required variables to fetch the data into database.
         var name: EditText = findViewById(R.id.pName)
         var DOB:EditText = findViewById(R.id.pDOB)
@@ -46,7 +38,6 @@ class patientSignup : AppCompatActivity() {
         var contact:EditText = findViewById(R.id.pContactNo)
         var email:EditText = findViewById(R.id.pEmail)
         var pass:EditText = findViewById(R.id.pPass)
-
         //button for signing up
         var signup: Button = findViewById(R.id.btnSignUp)
 
@@ -61,45 +52,20 @@ class patientSignup : AppCompatActivity() {
             var pContactNo: String? = contact.text.toString()
             var pEmail: String? = email.text.toString()
             var pPass: String? = pass.text.toString()
-
             //creating a patient-data object, in which all our patient data required for sign up will be stored.
-
             var pData: PatientData = PatientData()
             pData.setData(pName, pDOB, pAge, pGender, pContactNo, pEmail, pPass)
-            //fetching the unique patient ID, it also helps us identify the number of patients registered into our DB.
-            var pID = mypref.getInt("p_ID", 1)
-
-
             //here, we're checking if the user doesnt exist already then we will create new account, else user will have to try another email
             // which has not been used before.
-            authentication.createUserWithEmailAndPassword(pData.email.toString(), pData.pass.toString()).addOnCompleteListener(this@patientSignup)
-            {
-                    task ->
+            //storing the newly registered patient's data into our database with unique identification.
+            myRef.child("" +pData.ID.toString()).setValue(pData).addOnCompleteListener(this@patientSignup){
+                task ->
                 if(task.isSuccessful)
                 {
-                    //storing the newly registered patient's data into our database with unique identification.
-                    myRef.child("Patient: " + pID).setValue(pData).addOnCompleteListener(this@patientSignup){
-                            task ->
-
-                        if(task.isSuccessful)
-                        {
-                            //whenever new patient registers, the patient ID will be incremented by 1 to uniquely identify it.
-                            editor.putInt("p_ID", pID+1)
-                            editor.apply()
-                            editor.commit()
-                        }
-                    }
-
                     loading.dismiss()
                     var AD = AlertDialog.Builder(this@patientSignup)
                     AD.setTitle("Sign Up Successful")
                     AD.setPositiveButton("Continue") { dialog, which ->
-
-                        val user = authentication.currentUser
-                        val profileUpdates = userProfileChangeRequest {
-                            displayName = pData.name.toString()
-                        }
-                        user?.updateProfile(profileUpdates)
                         editor1.putString("SignpatMail", pEmail)
                         editor1.apply()
                         editor1.commit()
@@ -108,7 +74,6 @@ class patientSignup : AppCompatActivity() {
                     }
                     AD.create()
                     AD.show()
-
                 }
                 else
                 {
@@ -119,12 +84,12 @@ class patientSignup : AppCompatActivity() {
                     AD.setPositiveButton("Continue") { dialog, which ->
                     }
                     AD.setNegativeButton("Go Back") { dialog, which ->
-
                         startActivity(Intent(this@patientSignup, patientSign::class.java))
                         finish()
                     }
                     AD.create()
                     AD.show()
+                    Toast.makeText(baseContext, " "+task.exception.toString(), Toast.LENGTH_LONG).show()
                 }
             }
         }
