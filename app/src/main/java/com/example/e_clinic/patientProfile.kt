@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -28,7 +29,7 @@ class patientProfile : AppCompatActivity() {
         var editor1 = mypref1.edit()
         var signerMail=mypref1.getString("SignpatMail",null)
         val database = Firebase.database
-        val db = database.getReference("Patient Data/")
+        val db = database.getReference("Patient Data")
         var user=PatientData()
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
