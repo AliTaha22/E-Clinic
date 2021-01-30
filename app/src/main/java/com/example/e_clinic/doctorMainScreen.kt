@@ -73,7 +73,9 @@ class doctorMainScreen : AppCompatActivity() {
 
 
 
-        viewPatients.setOnClickListener({})
+        viewPatients.setOnClickListener({
+            startActivity(Intent(this,selectPatient::class.java))
+        })
         checkAppointments.setOnClickListener({})
 
 

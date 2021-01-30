@@ -55,13 +55,11 @@ class patientSign : AppCompatActivity() {
                             else
                             {
                                 Toast.makeText(this@patientSign, "Invalid Password", Toast.LENGTH_SHORT).show()
-                                break
                             }
                         }
                         else
                         {
                             Toast.makeText(this@patientSign, "Invalid Email", Toast.LENGTH_SHORT).show()
-                            break
                         }
                     }
                 }

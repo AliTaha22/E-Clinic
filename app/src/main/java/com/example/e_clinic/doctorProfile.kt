@@ -42,6 +42,9 @@ class doctorProfile : AppCompatActivity() {
                         textGender.text =  user?.gender.toString()
                         textContact.text =  user?.contact.toString()
                         textMail.text =  user?.ID.toString()
+                        editor1.putString("docQual",textQual.text.toString())
+                        editor1.apply()
+                        editor1.commit()
                         break
                     }
                 }

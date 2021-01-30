@@ -96,6 +96,30 @@
             android:id="@+id/mailView"
             ></TextView>
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/email"
+            ></ImageView>
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="Doctor Reply"
+            android:textSize="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:textColorHint="#504E4E"
+            android:textColor="@color/black"
+            android:id="@+id/docReply"
+            ></TextView>
+    </LinearLayout>
 
     <EditText
         android:layout_marginTop="10dp"

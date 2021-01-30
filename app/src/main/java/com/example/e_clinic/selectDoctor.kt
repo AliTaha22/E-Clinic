@@ -22,6 +22,7 @@ class selectDoctor : AppCompatActivity() {
         var rc: RecyclerView =findViewById(R.id.docRecycler)
         rc.layoutManager= LinearLayoutManager(this)
         var patMail: String? =mypref1.getString("SignpatMail",null)
+    //for checking of patient doctor department like MBBS Urology etc
         var patDiseas:String?=mypref1.getString("patDis",null)
 
         var DocName= arrayListOf<String>()
@@ -41,7 +42,7 @@ class selectDoctor : AppCompatActivity() {
                         DocEmail.add((us?.ID).toString())
                     }
                 }
-                rc.adapter = DoctorADP(applicationContext, DocName, DocQual, DocEmail,patDiseas.toString(),patMail.toString())
+                rc.adapter = DoctorADP(applicationContext, DocName, DocQual, DocEmail, patMail.toString())
             }
             override fun onCancelled(error: DatabaseError) {
             }
