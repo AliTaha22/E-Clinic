@@ -9,13 +9,16 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
-class PatientADP (ctx: Context, _patName: List<String>, _patMsg: List<String>, _patId: List<String>, _pid: String): RecyclerView.Adapter<PatientADP.PatViewHolder>() {
+class PatientADP(ctx: Context, _patName: List<String>, _patId: List<String>, _pid: String): RecyclerView.Adapter<PatientADP.PatViewHolder>() {
         var context=ctx
         var patName=_patName
-        var patMsg=_patMsg
         var patId=_patId
         var msg=" "
         var p_id=_pid
@@ -27,6 +30,7 @@ class PatientADP (ctx: Context, _patName: List<String>, _patMsg: List<String>, _
         var D_msg:EditText=itemView.findViewById(R.id.d_msg)
         var bt:Button=itemView.findViewById(R.id.postsolution)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientADP.PatViewHolder {
         var itemView= LayoutInflater.from(context).inflate(R.layout.patientadapter, parent, false)
 
@@ -35,16 +39,28 @@ class PatientADP (ctx: Context, _patName: List<String>, _patMsg: List<String>, _
 
     override fun onBindViewHolder(holder: PatientADP.PatViewHolder, position: Int) {
         holder.nameView.text = patName[position]
-        holder.msgView.text = patMsg[position]
         holder.idView.text = patId[position]
+        val database = Firebase.database
+
+        var idRef1:String=patId[position]
+        var idRef2="D_${p_id.toString()}".toString()
+        val db = database.getReference("Patient Data/$idRef1/$idRef2")
+        db.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var temp = snapshot.getValue<String>()
+                Toast.makeText(context,"HLo" +temp.toString(), Toast.LENGTH_SHORT).show()
+                holder.msgView.text=temp.toString()
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
         holder.bt.setOnClickListener {
             msg=holder.D_msg.text.toString()
-            val database = Firebase.database
             val myRef = database.getReference("Patient Data")
-            myRef.child(patId[position]).child(""+p_id.toString()).setValue(msg.toString())
-            val database1 = Firebase.database
-            val myRef1 = database1.getReference("Doctor Data")
-            myRef1.child(p_id.toString()).child("msg").setValue(msg.toString())
+            myRef.child(patId[position]).child("D_"+p_id.toString()).setValue(msg.toString())
+            val myRef1 = database.getReference("Doctor Data")
+            myRef1.child(p_id.toString()).child("D_"+patId[position]).setValue(msg.toString())
         }
     }
 

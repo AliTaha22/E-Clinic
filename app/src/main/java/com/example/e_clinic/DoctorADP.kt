@@ -7,8 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 
@@ -30,6 +35,7 @@ class DoctorADP(
         var nameView: TextView =itemView.findViewById(R.id.nameView)
         var qualView: TextView =itemView.findViewById(R.id.qualView)
         var mailView: TextView =itemView.findViewById(R.id.mailView)
+        var msgView1: TextView =itemView.findViewById(R.id.docReply)
         var docCon: Button =itemView.findViewById(R.id.ContactDoc)
         var P_msg:EditText=itemView.findViewById(R.id.p_msg)
     }
@@ -46,16 +52,27 @@ class DoctorADP(
     //in it i put the message in doctor data which is sent by a patient with the id of patient
     override fun onBindViewHolder(holder: DocViewHolder, position: Int) {
         val database = Firebase.database
-        val myRef2 = database.getReference("Doctor Data")
         holder.nameView.text = docName[position]
         holder.qualView.text = docQual[position]
         holder.mailView.text = docMail[position]
+        var idRef1:String=docMail[position]
+        var idRef2="P_${p_id.toString()}".toString()
+        val db = database.getReference("Patient Data/$idRef1/$idRef2")
+        db.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var temp = snapshot.getValue<String>()
+                holder.msgView1.text=temp.toString()
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
         holder.docCon.setOnClickListener {
             msg=holder.P_msg.text.toString()
             val myRef = database.getReference("Doctor Data")
-            myRef.child(docMail[position]).child(""+p_id.toString()).setValue(msg.toString())
+            myRef.child(docMail[position]).child("P_"+p_id.toString()).setValue(msg.toString())
             val myRef1 = database.getReference("Patient Data")
-            myRef1.child(p_id.toString()).child("msg").setValue(msg.toString())
+            myRef1.child(p_id.toString()).child("P_"+docMail[position]).setValue(msg.toString())
         }
     }
 }

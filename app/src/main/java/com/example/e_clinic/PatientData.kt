@@ -12,7 +12,6 @@ class PatientData()
     var ID: String? = null
     var pass: String? = null
     var dep:String?=null
-    var msg:String?="Not enter yet"
     fun setData(_name:String?,  _DOB:String?, _age:String?, _gender:String?, _contact:String?, _ID:String?, _pass:String?)
     {
         name=_name

@@ -27,7 +27,6 @@ class selectPatient : AppCompatActivity() {
         var docQual:String?=mypref1.getString("docQual",null)
 
         var PatName= arrayListOf<String>()
-        var PatMsg= arrayListOf<String>()
         var PatId= arrayListOf<String>()
         var PatAge= arrayListOf<String>()
         var PatGender= arrayListOf<String>()
@@ -40,15 +39,13 @@ class selectPatient : AppCompatActivity() {
                     var us: PatientData? = obj.getValue(PatientData::class.java)
                     if (docQual == us?.dep) {
                         PatName.add((us?.name).toString())
-                        PatMsg.add((us?.msg).toString())
                         PatId.add((us?.ID).toString())
                         PatAge.add((us?.ID).toString())
                         PatGender.add((us?.ID).toString())
-                        Toast.makeText(this@selectPatient, "A: "+us?.msg.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
                 rc.adapter =
-                    PatientADP(applicationContext, PatName, PatMsg, PatId, docId.toString())
+                    PatientADP(applicationContext, PatName, PatId, docId.toString())
             }
 
             override fun onCancelled(error: DatabaseError) {
