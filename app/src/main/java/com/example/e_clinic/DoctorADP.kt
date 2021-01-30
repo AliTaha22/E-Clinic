@@ -55,7 +55,7 @@ class DoctorADP(
             val myRef = database.getReference("Doctor Data")
             myRef.child(docMail[position]).child(""+p_id.toString()).setValue(msg.toString())
             val myRef1 = database.getReference("Patient Data")
-            myRef1.child(p_id.toString()).child(docMail[position].toString()).setValue(msg.toString())
+            myRef1.child(p_id.toString()).child("msg").setValue(msg.toString())
         }
     }
 }

@@ -35,7 +35,7 @@ class PatientADP (ctx: Context, _patName: List<String>, _patMsg: List<String>, _
 
     override fun onBindViewHolder(holder: PatientADP.PatViewHolder, position: Int) {
         holder.nameView.text = patName[position]
-        holder.msgView.text = patMsg[position].toString()
+        holder.msgView.text = patMsg[position]
         holder.idView.text = patId[position]
         holder.bt.setOnClickListener {
             msg=holder.D_msg.text.toString()

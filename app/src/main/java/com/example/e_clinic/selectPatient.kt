@@ -44,7 +44,7 @@ class selectPatient : AppCompatActivity() {
                         PatId.add((us?.ID).toString())
                         PatAge.add((us?.ID).toString())
                         PatGender.add((us?.ID).toString())
-                        Toast.makeText(this@selectPatient, us?.msg.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@selectPatient, "A: "+us?.msg.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
                 rc.adapter =
