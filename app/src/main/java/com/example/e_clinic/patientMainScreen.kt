@@ -62,15 +62,9 @@ class patientMainScreen : AppCompatActivity() {
         findDoctor.setOnClickListener {
             startActivity(Intent(this,patientDisease::class.java))
         }
-
-
-        bookAppointment.setOnClickListener({})
-        viewReply.setOnClickListener({})
-
-
-
         signOut.setOnClickListener {
-            editor1.putString(null,"SignpatMail")
+            editor1.putString("SignpatMail",null)
+            editor1.putString("patDis",null)
             editor1.apply()
             editor1.commit()
             startActivity(Intent(this@patientMainScreen, patientSign::class.java))

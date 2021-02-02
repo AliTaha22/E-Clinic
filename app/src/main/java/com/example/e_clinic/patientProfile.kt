@@ -1,5 +1,6 @@
 package com.example.e_clinic
 
+import android.app.ProgressDialog
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,8 +23,9 @@ class patientProfile : AppCompatActivity() {
         var textGender: TextView =findViewById(R.id.PP_Gender)
         var textContact: TextView =findViewById(R.id.PP_Contact)
         var textMail: TextView =findViewById(R.id.PP_Email)
-        var textDisease: TextView =findViewById(R.id.PP_Disease)
-
+        var loading= ProgressDialog(this)
+        loading.setTitle("Data Loading !")
+        loading.setMessage("Please Wait....")
         //Getting data from firebase
         var mypref1: SharedPreferences = getSharedPreferences("PatientEM", MODE_PRIVATE)
         var editor1 = mypref1.edit()
@@ -31,6 +33,7 @@ class patientProfile : AppCompatActivity() {
         val database = Firebase.database
         val db = database.getReference("Patient Data")
         var user=PatientData()
+        loading.show()
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (obj in snapshot.children) {
@@ -46,6 +49,7 @@ class patientProfile : AppCompatActivity() {
                         break
                     }
                 }
+                loading.dismiss()
             }
             override fun onCancelled(error: DatabaseError) {
             }

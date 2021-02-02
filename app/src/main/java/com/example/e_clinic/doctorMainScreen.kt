@@ -48,6 +48,9 @@ class doctorMainScreen : AppCompatActivity() {
                     if(signerId==user?.ID)
                     {
                         dname.text = "Hi, Dr " + user?.name.toString()
+                        editor1.putString("docQual",user?.qualification.toString())
+                        editor1.apply()
+                        editor1.commit()
                         break
                     }
                 }
@@ -81,7 +84,8 @@ class doctorMainScreen : AppCompatActivity() {
 
         signOut.setOnClickListener({
 
-            editor1.putString(null,"SigndocMail")
+            editor1.putString("SigndocMail",null)
+            editor1.putString("docQual",null)
             editor1.apply()
             editor1.commit()
             startActivity(Intent(this@doctorMainScreen, doctorSign::class.java))

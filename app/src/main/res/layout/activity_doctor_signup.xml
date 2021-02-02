@@ -45,6 +45,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:id="@+id/dName"
+            android:inputType="textPersonName"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -66,7 +67,7 @@
             android:hint="Qualification"
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
-            android:inputType="text"
+            android:inputType="textPersonName"
             android:id="@+id/dQualification"
             android:textAllCaps="false"
             ></EditText>
@@ -90,6 +91,7 @@
             android:layout_marginLeft="22dp"
             android:textColor="@color/black"
             android:id="@+id/dAge"
+            android:inputType="number"
             ></EditText>
     </LinearLayout>
     <LinearLayout
@@ -111,6 +113,7 @@
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:id="@+id/dGender"
+            android:inputType="textCapCharacters"
             ></EditText>
     </LinearLayout>
     <LinearLayout

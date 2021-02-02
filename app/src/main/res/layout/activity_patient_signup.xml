@@ -112,6 +112,7 @@
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:id="@+id/pGender"
+            android:inputType="textPersonName"
             ></EditText>
     </LinearLayout>
     <LinearLayout

@@ -1,6 +1,8 @@
 package com.example.e_clinic
 
 import android.content.Context
+import android.telephony.SmsManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,19 +18,24 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
-class PatientADP(ctx: Context, _patName: List<String>, _patId: List<String>, _pid: String): RecyclerView.Adapter<PatientADP.PatViewHolder>() {
-        var context=ctx
-        var patName=_patName
-        var patId=_patId
-        var msg=" "
-        var p_id=_pid
+class PatientADP(ctx: Context, _patName: ArrayList<String>, _patId: ArrayList<String>,_patAge: ArrayList<String>,_patGender: ArrayList<String>,_patContatc: ArrayList<String>, _pid: String): RecyclerView.Adapter<PatientADP.PatViewHolder>() {
+    var context=ctx
+    var patName=_patName
+    var patId=_patId
+    var p_id=_pid
+    var p_Age=_patAge
+    var p_Gender=_patGender
+    var p_contact=_patContatc
     class PatViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
         var nameView: TextView =itemView.findViewById(R.id.p_name)
         var msgView: TextView =itemView.findViewById(R.id.patMsg)
+        var ageView: TextView =itemView.findViewById(R.id.p_age)
+        var genderView: TextView =itemView.findViewById(R.id.p_gender)
         var idView: TextView =itemView.findViewById(R.id.p_id)
         var D_msg:EditText=itemView.findViewById(R.id.d_msg)
         var bt:Button=itemView.findViewById(R.id.postsolution)
+        var bt2:Button=itemView.findViewById(R.id.appointment)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientADP.PatViewHolder {
@@ -40,27 +47,37 @@ class PatientADP(ctx: Context, _patName: List<String>, _patId: List<String>, _pi
     override fun onBindViewHolder(holder: PatientADP.PatViewHolder, position: Int) {
         holder.nameView.text = patName[position]
         holder.idView.text = patId[position]
-        val database = Firebase.database
+        holder.ageView.text = p_Age[position]
+        holder.genderView.text = p_Gender[position]
+        var database = Firebase.database
+        var idRef1:String=p_id.toString()
+        var idRef2="P_${patId[position].toString()}".toString()
 
-        var idRef1:String=patId[position]
-        var idRef2="D_${p_id.toString()}".toString()
-        val db = database.getReference("Patient Data/$idRef1/$idRef2")
+        var db = database.getReference("Doctor Data/$idRef1/$idRef2/")
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var temp = snapshot.getValue<String>()
-                Toast.makeText(context,"HLo" +temp.toString(), Toast.LENGTH_SHORT).show()
                 holder.msgView.text=temp.toString()
+                db.removeEventListener(this)
             }
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
         holder.bt.setOnClickListener {
-            msg=holder.D_msg.text.toString()
-            val myRef = database.getReference("Patient Data")
-            myRef.child(patId[position]).child("D_"+p_id.toString()).setValue(msg.toString())
-            val myRef1 = database.getReference("Doctor Data")
-            myRef1.child(p_id.toString()).child("D_"+patId[position]).setValue(msg.toString())
+            var dmsg=holder.D_msg.text.toString()
+            var myRef = database.getReference("Patient Data/")
+            myRef.child(patId[position]).child("D_"+p_id.toString()).setValue(dmsg.toString())
+
+            Log.d("myt","hello")
+        }
+        holder.bt2.setOnClickListener {
+            var name=patName[position]
+            var aptMsg="Dear Patient $name your kindly visit your doctor on Sunday at 12:00 PM thanks"
+            var number=p_contact[position]
+            Toast.makeText(context, "Message sent to $name and apt MSG is $aptMsg", Toast.LENGTH_SHORT).show()
+            var obj:SmsManager= SmsManager.getDefault()
+            obj.sendTextMessage(number.toString(), null,aptMsg.toString(),null, null)
         }
     }
 

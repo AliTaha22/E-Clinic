@@ -1,6 +1,7 @@
 package com.example.e_clinic
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,9 @@ import com.google.firebase.ktx.Firebase
 
 class DoctorADP(
     ctx: Context,
-    _docName: List<String>,
-    _docQual: List<String>,
-    _docMail: List<String>,
+    _docName: ArrayList<String>,
+    _docQual: ArrayList<String>,
+    _docMail: ArrayList<String>,
     _pid: String
 ): RecyclerView.Adapter<DoctorADP.DocViewHolder>() {
     var context=ctx
@@ -51,28 +52,29 @@ class DoctorADP(
     }
     //in it i put the message in doctor data which is sent by a patient with the id of patient
     override fun onBindViewHolder(holder: DocViewHolder, position: Int) {
-        val database = Firebase.database
+        var database = Firebase.database
         holder.nameView.text = docName[position]
         holder.qualView.text = docQual[position]
         holder.mailView.text = docMail[position]
-        var idRef1:String=docMail[position]
-        var idRef2="P_${p_id.toString()}".toString()
-        val db = database.getReference("Patient Data/$idRef1/$idRef2")
+        var idRef1:String=p_id.toString()
+        var idRef2="D_${docMail[position].toString()}".toString()
+        var db = database.getReference("Patient Data/$idRef1/$idRef2/")
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var temp = snapshot.getValue<String>()
-                holder.msgView1.text=temp.toString()
+                holder.msgView1.text = temp.toString()
+                Log.d("listener","dd")
+                db.removeEventListener(this)
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
         holder.docCon.setOnClickListener {
             msg=holder.P_msg.text.toString()
-            val myRef = database.getReference("Doctor Data")
+            var myRef = database.getReference("Doctor Data/")
             myRef.child(docMail[position]).child("P_"+p_id.toString()).setValue(msg.toString())
-            val myRef1 = database.getReference("Patient Data")
-            myRef1.child(p_id.toString()).child("P_"+docMail[position]).setValue(msg.toString())
         }
     }
 }

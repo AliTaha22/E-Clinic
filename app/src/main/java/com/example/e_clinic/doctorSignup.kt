@@ -1,6 +1,7 @@
 package com.example.e_clinic
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,11 @@ class doctorSignup : AppCompatActivity() {
         //getting required reference from firebase.
         val database = Firebase.database
         val myRef = database.getReference("Doctor Data")
+
+
+        var loading= ProgressDialog(this)
+        loading.setTitle("Signing !")
+        loading.setMessage("Please Wait....")
         //Making share pref for the finding of doctor data who sign in i pass userID from this screen to doctor main screen and search it in firebase
         var mypref1: SharedPreferences = getSharedPreferences("DoctorEM", MODE_PRIVATE)
         var editor1 = mypref1.edit()
@@ -35,6 +41,7 @@ class doctorSignup : AppCompatActivity() {
         var signup: Button = findViewById(R.id.d_btnSignUp)
         signup.setOnClickListener {
             //storing the entered patient data into strings.
+            loading.show()
             var dName: String? = name.text.toString()
             var dQualification: String? = qualification.text.toString()
             var dAge: String? = age.text.toString()
@@ -50,6 +57,7 @@ class doctorSignup : AppCompatActivity() {
                     task ->
                 if(task.isSuccessful)
                 {
+                    loading.dismiss()
                     var AD = AlertDialog.Builder(this@doctorSignup)
                     AD.setTitle("Sign Up Successful")
                     AD.setPositiveButton("Continue") { dialog, which ->
@@ -64,6 +72,7 @@ class doctorSignup : AppCompatActivity() {
                 }
                 else
                 {
+                    loading.dismiss()
                     var AD = AlertDialog.Builder(this@doctorSignup)
                     AD.setTitle("Sign Up Error")
                     AD.setMessage(task.exception.toString())

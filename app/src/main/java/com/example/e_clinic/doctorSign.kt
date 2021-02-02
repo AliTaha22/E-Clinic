@@ -1,5 +1,6 @@
 package com.example.e_clinic
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -29,40 +30,70 @@ class doctorSign : AppCompatActivity() {
         //Making share pref for the finding of doctor data who sign in i pass id from this screen to doctor main screen and search it in firebase
         var mypref1: SharedPreferences = getSharedPreferences("DoctorEM", MODE_PRIVATE)
         var editor1 = mypref1.edit()
+        var loading= ProgressDialog(this)
+        loading.setTitle("Signing !")
+        loading.setMessage("Please Wait....")
 
 
-        signIn.setOnClickListener {
+        if (signIn_ID!=null && signIn_password!==null) {
+            signIn.setOnClickListener {
 
-            var id: String = signIn_ID.text.toString()
-            var pass: String = signIn_password.text.toString()
-            val database = Firebase.database
-            val db = database.getReference("Doctor Data/")
-            var use=DoctorData()
-            db.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (obj in snapshot.children) {
-                        use = obj.getValue(DoctorData::class.java)!!
-                        if (id == obj.key) {
-                            if (pass == use.pass) {
-                                editor1.putString("SigndocMail", id)
-                                editor1.apply()
-                                editor1.commit()
-                                startActivity(Intent(this@doctorSign, doctorMainScreen::class.java))
-                                Toast.makeText(this@doctorSign, "Sign in successful", Toast.LENGTH_LONG).show()
-                                finish()
+                loading.show()
+                var id: String = signIn_ID.text.toString()
+                var pass: String = signIn_password.text.toString()
+                val database = Firebase.database
+                val db = database.getReference("Doctor Data/")
+                var use = DoctorData()
+                db.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (obj in snapshot.children) {
+                            use = obj.getValue(DoctorData::class.java)!!
+                            if (id == obj.key) {
+                                if (pass == use.pass) {
+                                    loading.dismiss()
+                                    editor1.putString("SigndocMail", id)
+                                    editor1.apply()
+                                    editor1.commit()
+                                    startActivity(
+                                        Intent(
+                                            this@doctorSign,
+                                            doctorMainScreen::class.java
+                                        )
+                                    )
+                                    Toast.makeText(
+                                        this@doctorSign,
+                                        "Sign in successful",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    finish()
+                                    break
+                                } else {
+                                    loading.dismiss()
+                                    Toast.makeText(
+                                        this@doctorSign,
+                                        "Invalid Password",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             } else {
-                                Toast.makeText(this@doctorSign, "Invalid Password", Toast.LENGTH_SHORT).show()
+                                loading.dismiss()
+                                Toast.makeText(
+                                    this@doctorSign,
+                                    "Invalid User-ID",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
-                        else
-                        {
-                            Toast.makeText(this@doctorSign, "Invalid User-ID", Toast.LENGTH_SHORT).show()
-                        }
                     }
-                }
-                override fun onCancelled(error: DatabaseError) {
-                }
-            })
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "Enter Id and Password", Toast.LENGTH_SHORT).show()
         }
         signup.setOnClickListener {
             startActivity(Intent(this, doctorSignup::class.java))
