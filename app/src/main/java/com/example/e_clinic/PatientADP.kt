@@ -28,6 +28,7 @@ class PatientADP(ctx: Context, _patName: ArrayList<String>, _patId: ArrayList<St
     var p_contact=_patContatc
     class PatViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
+
         var nameView: TextView =itemView.findViewById(R.id.p_name)
         var msgView: TextView =itemView.findViewById(R.id.patMsg)
         var ageView: TextView =itemView.findViewById(R.id.p_age)
